@@ -9,14 +9,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 xcode-select --install
 sudo xcodebuild -license
 
-mkdir -p "$HOME/code/github"
+mkdir -p "$HOME/repo/"
 
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-# Install RVM (Ruby Version Manager)
-gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-curl -sSL https://get.rvm.io | bash -s stable -- --ignore-dotfiles
 
 # Install packages for the brew bundle to work
 brew install mas openssl
@@ -28,7 +24,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Install all the things
-brew bundle --file="$DOTFILES_PATH/mac/Brewfile"
+brew bundle --file="./macos-configurator/Brewfile"
 
 ###############################################################################
 # App config                                                                  #
@@ -47,9 +43,6 @@ git clone https://github.com/powerline/fonts.git $POWERLINE_FONTS_PATH --depth=1
 $POWERLINE_FONTS_PATH/install.sh
 rm -rf $POWERLINE_FONTS_PATH
 unset POWERLINE_FONTS_PATH
-
-# Set macOS defaults
-./macos-defaults.sh
 
 sudo echo "$(which zsh)" >/etc/shells
 chsh -s $(which zsh)
