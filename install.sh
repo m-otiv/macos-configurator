@@ -44,9 +44,6 @@ $POWERLINE_FONTS_PATH/install.sh
 rm -rf $POWERLINE_FONTS_PATH
 unset POWERLINE_FONTS_PATH
 
-sudo echo "$(which zsh)" >/etc/shells
-chsh -s $(which zsh)
-
 # Install Xcode. This comes last cause it's 12GB
 mas install 497799835
 
